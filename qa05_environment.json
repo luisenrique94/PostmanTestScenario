@@ -1,0 +1,19 @@
+{
+	"id": "18ae41a0-3696-4c76-a418-023cbf6fe9f1",
+	"name": "QA05_AUTOMATION",
+	"values": [
+		{
+			"key": "token_qa05_automation",
+			"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdiODcxMTIzNzU0MjdkNjU3ZjVlMjVjYTAxZDU2NWU1OTJhMjMxZGIiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9pbmthZmFybWEtcWEiLCJhdWQiOiJpbmthZmFybWEtcWEiLCJhdXRoX3RpbWUiOjE2MjE4ODcxNzksInVzZXJfaWQiOiJnOG5wZ1ZiZ2g4Ym5aNWJvTllVbFgyaUQwWEEzIiwic3ViIjoiZzhucGdWYmdoOGJuWjVib05ZVWxYMmlEMFhBMyIsImlhdCI6MTYzMjk1MDQ1OSwiZXhwIjoxNjMyOTU0MDU5LCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7fSwic2lnbl9pbl9wcm92aWRlciI6ImFub255bW91cyJ9fQ.T8x7MqU5w8fMyCxn_PvgdPc7Y3svI4krQHQh8IB3XjzzM3dnpPkb606m-sucUkgDlrTF7OuV0AtHfIfSCO0jkeeLF1ZbWOvn_zCWNNGUHYVYu3EfjMgBNvWLBGqMHQDCYqP73tisLBaB39FVHQym_03y_zM6Dhvol97QIkLZdEW-8IRBXrHfcRFOZupvUGyaTJ3USak4PY7fWF0WobFeiT-iqz7eC1_Z9hp22QtwA1-HcQu5H_P4Kj_iH0nBaBpMBvyFBZSbn2Kk2lmMLcKgvkWk8ycitjnP1UyeWzX8JF1WxWup4eHdyBIxo8Tmi3CDU1RVEhlFUh60GY7mvNhS3w",
+			"enabled": true
+		},
+		{
+			"key": "url_qa05",
+			"value": "https://ulmtgv7wxa.execute-api.us-east-1.amazonaws.com/QA05/v1/api/",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2021-09-29T20:13:25.441Z",
+	"_postman_exported_using": "Postman/9.0.3"
+}

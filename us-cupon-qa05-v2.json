@@ -1,0 +1,540 @@
+{
+	"info": {
+		"_postman_id": "30a5501c-2bb9-49d5-bbfe-fec1c2572a6b",
+		"name": "AUTOMATIZACION-CUPONERO-QA05",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ID_TOKEN_QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"token valido y almacenado\", function () {\r",
+							"     pm.response.to.be.ok;\r",
+							"     pm.response.to.be.withBody;\r",
+							"     pm.response.to.be.json;\r",
+							"     var jsonData = pm.response.json();\r",
+							"     pm.environment.set(\"token_qa05_auto\", jsonData.id_token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://securetoken.googleapis.com/v1/token?key=AIzaSyDDiuzQN76HTaSP1ddlVpIjFLeSB70xFN8&grant_type=refresh_token&refresh_token=AGEhc0CbwITbU1NcGovO3v3KWYu0kgq7LJ3t4vCM-i4BZ0Rv7_b_iUT04xQGr1gMna964-JvAHOzBo7l_OUvKRmsTGm9WjgRXAk233QL0pT5GRiYRBE1L1MH8FG9bMpXWDSrn1YbQNDg6ivdA3Pqgi4sg9g-TtQfF0DIJvHF4MOQj9erjjoTzw8",
+					"protocol": "https",
+					"host": [
+						"securetoken",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"token"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "AIzaSyDDiuzQN76HTaSP1ddlVpIjFLeSB70xFN8"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token"
+						},
+						{
+							"key": "refresh_token",
+							"value": "AGEhc0CbwITbU1NcGovO3v3KWYu0kgq7LJ3t4vCM-i4BZ0Rv7_b_iUT04xQGr1gMna964-JvAHOzBo7l_OUvKRmsTGm9WjgRXAk233QL0pT5GRiYRBE1L1MH8FG9bMpXWDSrn1YbQNDg6ivdA3Pqgi4sg9g-TtQfF0DIJvHF4MOQj9erjjoTzw8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUTH-QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validate the whole response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.companyName).to.eql(\"MIFARMA\");\r",
+							"\r",
+							"  //  pm.expect(jsonData.data.cellphone).to.eql(\"999046712\");\r",
+							"//    pm.expect(jsonData.data.email).to.eql(\"luisenriquechavezporroa@gmail.com\");\r",
+							"}\r",
+							");\r",
+							"/*\r",
+							"{\r",
+							"    \"companyName\": \"MIFARMA\",\r",
+							"    \"data\": {\r",
+							"        \"name\": \"LUIS ENRIQUE\",\r",
+							"        \"cellphone\": \"999046712\",\r",
+							"        \"email\": \"luisenriquechavezporroa@gmail.com\"\r",
+							"    },\r",
+							"    \"error\": null\r",
+							"}*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token_qa05_automation}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificationDocument\": \"45987184\",\r\n    \"typeIdentificationDocument\": \"DNI\",\r\n    \"accessType\": \"ACCESS_BY_SESSION\",\r\n    \"companyCode\": \"MF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}auth",
+					"host": [
+						"{{url_qa05}}auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUTH SIN CUENTA_QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate the whole response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"  //  pm.expect(jsonData.companyName).to.eql(\"MIFARMA\");\r",
+							"    pm.expect(jsonData.error.code).to.eql(\"1002\");\r",
+							"    pm.expect(jsonData.error.description).to.equals(\"Usuario no encontrado.\")\r",
+							"\r",
+							"\r",
+							"});\r",
+							"/*\r",
+							"{\r",
+							"    \"companyName\": \"MIFARMA\",\r",
+							"    \"data\": {\r",
+							"        \"name\": \"LUIS ENRIQUE\",\r",
+							"        \"cellphone\": \"999046712\",\r",
+							"        \"email\": \"luisenriquechavezporroa@gmail.com\"\r",
+							"    },\r",
+							"    \"error\": null\r",
+							"}*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"type": "text",
+						"value": "{{token_qa05_automation}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificationDocument\": \"00112200\",\r\n    \"accessType\": \"ACCESS_BY_LOGIN\",\r\n    \"companyCode\": \"MF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}auth",
+					"host": [
+						"{{url_qa05}}auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LISTAR_CUPONES_QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"/*\r",
+							"var data = pm.response.json().data[0].friends;\r",
+							"pm.test('Cantidad de cupones = ' + data.length, function () {\r",
+							"    pm.expect(data.length)<=40;\r",
+							"});\r",
+							"*/\r",
+							"var body = JSON.parse(responseBody);\r",
+							"tests[\"Cantidad de cupones: \" + body.data.length]=40;\r",
+							"/*\r",
+							"var body = JSON.parse(responseBody);\r",
+							"pm.test(\"Cantidad de cupones es:\", function () {\r",
+							"    ad = JSON.parse(responseBody);\r",
+							"    pm.expect(ad.data.length).expect(ad);\r",
+							"});\r",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token_qa05_automation}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"identificationDocument\":\"72209308\",\r\n    \"limitAvailableStatus\": 40,\r\n    \"companyCode\": \"MF\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}coupons",
+					"host": [
+						"{{url_qa05}}coupons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUTH CON DATA INCOMPLETA-QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate the whole response\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.companyName).to.eql(\"MIFARMA\");\r",
+							"    pm.expect(jsonData.error.code).to.eql(\"1003\");\r",
+							"    pm.expect(jsonData.error.description).to.equals(\"Usuario obtenido con data incompleta.\")\r",
+							"\r",
+							"\r",
+							"});\r",
+							"/*\r",
+							"{\r",
+							"    \"companyName\": \"MIFARMA\",\r",
+							"    \"data\": {\r",
+							"        \"name\": \"LUIS ENRIQUE\",\r",
+							"        \"cellphone\": \"999046712\",\r",
+							"        \"email\": \"luisenriquechavezporroa@gmail.com\"\r",
+							"    },\r",
+							"    \"error\": null\r",
+							"}*/"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"type": "text",
+						"value": "{{token_qa05_automation}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificationDocument\": \"29633134\",\r\n    \"accessType\": \"ACCESS_BY_LOGIN\",\r\n    \"companyCode\": \"MF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}auth",
+					"host": [
+						"{{url_qa05}}auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DETALLE CUPON-QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"/*\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.data.isFavourite).to.eql(true);\r",
+							"});\r",
+							"*/\r",
+							"bodyData=JSON.parse(responseBody)\r",
+							"value=bodyData.data.productName\r",
+							"console.log(\"Nombre de campaña:\" +value)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"type": "text",
+						"value": "{{token_qa05_automation}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificationDocument\": \"72209308\",\r\n    \"id\": \"C9160800100000001\",\r\n    \"couponTypeCode\": 1,\r\n    \"parentCampaignCode\": \"\",\r\n    \"companyCode\": \"MF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}coupon",
+					"host": [
+						"{{url_qa05}}coupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AGREGAR CUPON FAVORITO_QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token_qa05_automation}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"identificationDocument\": \"72209308\",\r\n    \"id\": \"C9160800100000001\",\r\n    \"companyCode\": \"MF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}coupon/favorite",
+					"host": [
+						"{{url_qa05}}coupon"
+					],
+					"path": [
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ELIMINAR CUPON FAVORITO_QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token_qa05_automation}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}coupon/favorite/C9160800100000001",
+					"host": [
+						"{{url_qa05}}coupon"
+					],
+					"path": [
+						"favorite",
+						"C9160800100000001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUDIT-REDIRECT-ECOMMERCE-QA05_AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token_qa05_automation}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"documentNumber\": \"72209308\",\r\n    \"campaignCode\": \"91611\",\r\n    \"companyCode\": \"MF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}audit/redirect/ecommerce",
+					"host": [
+						"{{url_qa05}}audit"
+					],
+					"path": [
+						"redirect",
+						"ecommerce"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUDIT-COUPON-SEARCH-QA05-AUTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token_qa05_automation}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"identificationDocument\":\"72209308\",\r\n    \"searchWord\":\"dsct.\",\r\n    \"campaignCodes\":[91612,91613]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qa05}}audit/couponSearch",
+					"host": [
+						"{{url_qa05}}audit"
+					],
+					"path": [
+						"couponSearch"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
