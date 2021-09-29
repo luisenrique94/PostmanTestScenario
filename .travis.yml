@@ -1,0 +1,9 @@
+languaje: node_js
+node_js:
+-"14.4.0"
+
+install:
+- npm install newman
+
+script:
+- node_module/.bin/newman run api-reqres-v2.json -e reqres.postman_environment.json
