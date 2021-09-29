@@ -5,4 +5,4 @@ install:
 - npm install newman
 - npm install -g newman-reporter-htmlextra
 script:
-- node_modules/.bin/newman run api-reqres-v2.json -e reqres.postman_environment.json --reporter-htmlextra-export PostmanTestScenario/newman/report.html
+- node_modules/.bin/newman run api-reqres-v2.json -e reqres.postman_environment.json --reporter-htmlextra-export PostmanTestScenario/tree/master/newman/report.html
